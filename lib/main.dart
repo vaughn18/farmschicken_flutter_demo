@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_api/amplify_api.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'amplifyconfiguration.dart';
@@ -51,8 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           "#ff6666", "Cancel", true, ScanMode.QR);
       print(barcodeScanRes);
-      createTodo();
-    } catch (e) {
+      await createTodo();
+    } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
 
